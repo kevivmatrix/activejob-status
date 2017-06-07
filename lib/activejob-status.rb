@@ -1,6 +1,7 @@
 require 'activejob-status/storage'
 require 'activejob-status/status'
 require 'activejob-status/progress'
+require 'ostruct'
 
 module ActiveJob::Status
   extend ActiveSupport::Concern
@@ -36,7 +37,10 @@ module ActiveJob::Status
     end
 
     def get(id)
-      Status.new(id)
+      OpenStruct.new({
+        status: Status.new(id),
+        progress: Progress.new(id)
+      })
     end
   end
 end

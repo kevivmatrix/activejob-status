@@ -32,7 +32,7 @@ module ActiveJob::Status
     end
 
     def progress
-      read[:progress].to_f / read[:total].to_f
+      read[:progress].to_f
     end
 
     def present?

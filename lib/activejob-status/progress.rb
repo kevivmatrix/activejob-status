@@ -13,6 +13,10 @@ module ActiveJob::Status
       update
     end
 
+    def storage_update(message)
+      Storage.update(@job, message)
+    end
+
     def progress=(num)
       update { num }
     end
@@ -33,7 +37,7 @@ module ActiveJob::Status
 
     def update
       @progress = yield if block_given?
-      @job.status.update(hash)
+      storage_update(hash)
       self
     end
 
